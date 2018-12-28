@@ -1,5 +1,7 @@
 "use strict";
 var React = require('react');
+var FormInput = require('../common/formInput');
+
 var LoginForm = React.createClass({
 
     render: function() {
@@ -8,26 +10,22 @@ var LoginForm = React.createClass({
                 <div className="col-md-4">
                     <form className="form-signin">
                         <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
-                        
-                        <input 
-                            type="email" 
-                            id="inputEmail" 
+
+                        <FormInput 
+                            inputType="email" 
                             name="email"
-                            className="form-control" 
-                            placeholder="Email address" 
+                            placeholder="Email Address"
                             onChange={this.props.onChange} 
                             value={this.props.user.email} />
-                        
-                        <input 
-                            type="password" 
-                            id="inputPassword" 
+
+                        <FormInput 
+                            inputType="password"
                             name="password"
-                            className="form-control" 
-                            placeholder="Password" 
+                            placeholder="Password"
                             onChange={this.props.onChange} 
                             value={this.props.user.password} />
                         
-                        <button className="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                        <button className="btn btn-lg btn-primary btn-block" type="submit" onClick={this.props.onSave}>Sign in</button>
                     </form>
                 </div>
             </div>

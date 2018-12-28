@@ -1,9 +1,14 @@
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
 var LoginForm = require('./loginForm');
 
 var LoginPage = React.createClass({
+    mixins: [
+        Router.Navigation
+    ],
+
     getInitialState: function() {
         return {
             user: {
@@ -23,12 +28,18 @@ var LoginPage = React.createClass({
         return this.setState({user: this.state.user});
     },
 
+    saveUser: function(event) {
+        console.log(this.state.user);
+        this.transitionTo('profile');
+    },
+
     render: function() {
         return (
             <div>
                <LoginForm 
                     user={this.state.user}
-                    onChange={this.setUserState} />
+                    onChange={this.setUserState}
+                    onSave={this.saveUser} />
             </div>
         );
     }

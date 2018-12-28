@@ -33246,9 +33246,11 @@ var App = React.createClass({displayName: "App",
 });
 
 module.exports = App;
-},{"./common/menu":200,"jquery":1,"react":196,"react-router":27}],198:[function(require,module,exports){
+},{"./common/menu":201,"jquery":1,"react":196,"react-router":27}],198:[function(require,module,exports){
 "use strict";
 var React = require('react');
+var FormInput = require('../common/formInput');
+
 var LoginForm = React.createClass({displayName: "LoginForm",
 
     render: function() {
@@ -33257,26 +33259,22 @@ var LoginForm = React.createClass({displayName: "LoginForm",
                 React.createElement("div", {className: "col-md-4"}, 
                     React.createElement("form", {className: "form-signin"}, 
                         React.createElement("h1", {className: "h3 mb-3 font-weight-normal"}, "Please sign in"), 
-                        
-                        React.createElement("input", {
-                            type: "email", 
-                            id: "inputEmail", 
+
+                        React.createElement(FormInput, {
+                            inputType: "email", 
                             name: "email", 
-                            className: "form-control", 
-                            placeholder: "Email address", 
+                            placeholder: "Email Address", 
                             onChange: this.props.onChange, 
                             value: this.props.user.email}), 
-                        
-                        React.createElement("input", {
-                            type: "password", 
-                            id: "inputPassword", 
+
+                        React.createElement(FormInput, {
+                            inputType: "password", 
                             name: "password", 
-                            className: "form-control", 
                             placeholder: "Password", 
                             onChange: this.props.onChange, 
                             value: this.props.user.password}), 
                         
-                        React.createElement("button", {className: "btn btn-lg btn-primary btn-block", type: "submit"}, "Sign in")
+                        React.createElement("button", {className: "btn btn-lg btn-primary btn-block", type: "submit", onClick: this.props.onSave}, "Sign in")
                     )
                 )
             )
@@ -33286,13 +33284,18 @@ var LoginForm = React.createClass({displayName: "LoginForm",
 
 module.exports = LoginForm;
 
-},{"react":196}],199:[function(require,module,exports){
+},{"../common/formInput":200,"react":196}],199:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
+var Router = require('react-router');
 var LoginForm = require('./loginForm');
 
 var LoginPage = React.createClass({displayName: "LoginPage",
+    mixins: [
+        Router.Navigation
+    ],
+
     getInitialState: function() {
         return {
             user: {
@@ -33312,12 +33315,18 @@ var LoginPage = React.createClass({displayName: "LoginPage",
         return this.setState({user: this.state.user});
     },
 
+    saveUser: function(event) {
+        console.log(this.state.user);
+        this.transitionTo('profile');
+    },
+
     render: function() {
         return (
             React.createElement("div", null, 
                React.createElement(LoginForm, {
                     user: this.state.user, 
-                    onChange: this.setUserState})
+                    onChange: this.setUserState, 
+                    onSave: this.saveUser})
             )
         );
     }
@@ -33325,7 +33334,47 @@ var LoginPage = React.createClass({displayName: "LoginPage",
 
 module.exports = LoginPage;
 
-},{"./loginForm":198,"react":196}],200:[function(require,module,exports){
+},{"./loginForm":198,"react":196,"react-router":27}],200:[function(require,module,exports){
+"use strict";
+var React = require('react');
+var TextInput = React.createClass({displayName: "TextInput",
+
+    propTypes: {
+        name: React.PropTypes.string.isRequired,
+        onChange: React.PropTypes.func.isRequired,
+        placeholder: React.PropTypes.string,
+        value: React.PropTypes.string,
+        error: React.PropTypes.string
+    },
+
+    render: function() {
+        var wrapperClass = 'form-group';
+        if (this.props.error && this.props.error.length > 0) {
+           wrapperClass += " " + 'has-error'; 
+        }
+
+        return (
+            React.createElement("div", {className: wrapperClass}, 
+                React.createElement("div", {className: "field"}, 
+                    React.createElement("input", {
+                        className: "form-control", 
+                        type: this.props.inputType, 
+                        id: this.props.id, 
+                        name: this.props.name, 
+                        placeholder: this.props.placeholder, 
+                        onChange: this.props.onChange, 
+                        value: this.props.value}), 
+
+                    React.createElement("div", {className: "input"}, this.props.error)
+                )
+            )
+        );
+    }
+});
+
+module.exports = TextInput; 
+
+},{"react":196}],201:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -33361,7 +33410,7 @@ var Menu = React.createClass({displayName: "Menu",
 
 module.exports = Menu;
 
-},{"react":196}],201:[function(require,module,exports){
+},{"react":196}],202:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -33379,7 +33428,7 @@ var Home = React.createClass({displayName: "Home",
 
 module.exports = Home;
 
-},{"react":196}],202:[function(require,module,exports){
+},{"react":196}],203:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -33398,7 +33447,7 @@ var NotFoundPage = React.createClass({displayName: "NotFoundPage",
 
 module.exports = NotFoundPage;
 
-},{"react":196,"react-router":27}],203:[function(require,module,exports){
+},{"react":196,"react-router":27}],204:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -33424,7 +33473,7 @@ var ProfilePage = React.createClass({displayName: "ProfilePage",
 });
 
 module.exports = ProfilePage;
-},{"react":196,"react-router":27}],204:[function(require,module,exports){
+},{"react":196,"react-router":27}],205:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -33444,7 +33493,7 @@ var ProfileUserPage = React.createClass({displayName: "ProfileUserPage",
 });
 
 module.exports = ProfileUserPage;
-},{"react":196}],205:[function(require,module,exports){
+},{"react":196}],206:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -33454,7 +33503,7 @@ var routes = require('./routes');
 Router.run(routes, function(Handler) {
     React.render(React.createElement(Handler, null), document.getElementById('app'));
 });
-},{"./routes":206,"react":196,"react-router":27}],206:[function(require,module,exports){
+},{"./routes":207,"react":196,"react-router":27}],207:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -33474,4 +33523,4 @@ var routes = (
 
 module.exports = routes;
 
-},{"./components/app":197,"./components/auth/loginPage":199,"./components/homePage":201,"./components/notFoundPage":202,"./components/profile/profilePage":203,"./components/profile/profileUserPage":204,"react":196,"react-router":27}]},{},[205]);
+},{"./components/app":197,"./components/auth/loginPage":199,"./components/homePage":202,"./components/notFoundPage":203,"./components/profile/profilePage":204,"./components/profile/profileUserPage":205,"react":196,"react-router":27}]},{},[206]);
