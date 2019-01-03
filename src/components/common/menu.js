@@ -23,6 +23,9 @@ var Menu = React.createClass({
                             <li className="nav-item">
                                 <a className="nav-link" href="/#auth/login">Login</a>
                             </li>
+                            <li className="nav-item">
+                                <a className="nav-link" href="/#auth/signup">Sign up</a>
+                            </li>
                         </ul>
                     </div>
                 </nav>

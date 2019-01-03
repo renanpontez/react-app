@@ -11,6 +11,8 @@ var routes = (
         <Route name="profile" handler={require('./components/profile/profilePage')} />
         <Route name="profileUser" path="profile/:userId" handler={require('./components/profile/profileUserPage')} />
         <Route name="login" path="auth/login" handler={require('./components/auth/loginPage')} />
+        <Route name="signup" path="auth/signup" handler={require('./components/auth/signupPage')} />
+        <Route name="signupManager" path="auth/signup:id" handler={require('./components/auth/signupPage')} />
         <NotFoundRoute handler={require('./components/notFoundPage')}/>
     </Route>
 );

@@ -12,8 +12,13 @@ var ProfilePage = React.createClass({
 
                 <ul>
                     <li>
-                        <Link to="profileUser" params={{userId: 1}}>
+                        <Link to="signupManager" params={{id: 1}}>
                             Renan
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="signupManager" params={{id: 2}}>
+                            Renan 2
                         </Link>
                     </li>
                 </ul>

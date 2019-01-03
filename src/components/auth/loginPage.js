@@ -3,6 +3,7 @@
 var React = require('react');
 var Router = require('react-router');
 var LoginForm = require('./loginForm');
+var toastr = require('toastr');
 
 var LoginPage = React.createClass({
     mixins: [
@@ -20,7 +21,6 @@ var LoginPage = React.createClass({
     },
 
     setUserState: function(event) {
-        console.log(event.target.name);
         var field = event.target.name;
         var value = event.target.value;
 
@@ -29,7 +29,8 @@ var LoginPage = React.createClass({
     },
 
     saveUser: function(event) {
-        console.log(this.state.user);
+        toastr.success('User created successfully!');
+        
         this.transitionTo('profile');
     },
 
